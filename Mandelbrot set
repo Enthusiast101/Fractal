@@ -1,0 +1,48 @@
+import matplotlib.pyplot as plt
+import numpy as np
+
+# No of times the program will run:-
+times = 350
+
+real_val = np.linspace(-4, 1, times)
+imag_val = np.linspace(-1, 1, times)
+
+lst_x, lst_y = [], []
+
+
+def logic(real, imag):
+    # y = x^2 + c
+    x = 0
+    num = complex(real, imag)
+    for _ in range(1000):
+        y = (x ** 2) + num
+        x = y
+        if abs(x) > 2:
+            return True
+        else:
+            continue
+
+
+def main():
+    i = 0
+    for real in real_val:
+        i += 1
+        for imag in imag_val:
+            # Rounding values to 2 decimal places
+            new_real = round(real, 2)
+            new_imag = round(imag, 2)
+
+            # Using function
+            value = logic(new_real, new_imag)
+            if value:
+                continue
+            else:
+                plt.plot(real, imag, "k.", markersize=1)
+
+        # Counting the number of times the program runs
+        print(i)
+    plt.show()
+
+
+if __name__ == "__main__":
+    main()
